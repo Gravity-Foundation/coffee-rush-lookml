@@ -49,4 +49,27 @@ view: order_items {
     type: count
     drill_fields: [id, product_name, products.name, products.id, orders.id]
   }
+
+  measure: total_revenue {
+    type: sum
+    sql: ${line_total} ;;
+    value_format_name: usd
+  }
+
+  measure: total_quantity {
+    type: sum
+    sql: ${quantity} ;;
+  }
+
+  measure: total_discount {
+    type: sum
+    sql: ${discount_amount} ;;
+    value_format_name: usd
+  }
+
+  measure: average_unit_price {
+    type: average
+    sql: ${unit_price} ;;
+    value_format_name: usd
+  }
 }

@@ -62,6 +62,30 @@ view: orders {
     drill_fields: [detail*]
   }
 
+  measure: total_order_amount {
+    type: sum
+    sql: ${total_amount} ;;
+    value_format_name: usd
+  }
+
+  measure: average_order_value {
+    type: average
+    sql: ${total_amount} ;;
+    value_format_name: usd
+  }
+
+  measure: total_shipping {
+    type: sum
+    sql: ${shipping_cost} ;;
+    value_format_name: usd
+  }
+
+  measure: total_tax {
+    type: sum
+    sql: ${tax_amount} ;;
+    value_format_name: usd
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
