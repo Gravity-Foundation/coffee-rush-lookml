@@ -54,8 +54,9 @@
 
     dimension_group: created {
       type: time
+      datatype: date
       timeframes: [raw, date, week, month, quarter, year]
-      sql: ${TABLE}.created_at ;;
+      sql: ${TABLE}.created_date ;;
     }
 
     measure: count {
