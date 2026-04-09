@@ -11,7 +11,7 @@
 # For dataset details and generation info see:
 # https://github.com/Gravity-Foundation/synthetic_data_generator/tree/main/projects/coffee_rush
 
-connection: "coffee_rush"
+connection: "demo"
 
 include: "/views/*.view.lkml"
 
