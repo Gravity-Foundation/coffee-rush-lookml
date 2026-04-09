@@ -10,6 +10,7 @@
     dimension: customer_type {
       type: string
       sql: ${TABLE}.customer_type ;;
+      description: "Customer segment — consumer accounts (Home *) or business accounts (Café, Restaurant, Office, Hotel, Grocery tiers)"
     }
 
     dimension: email {
