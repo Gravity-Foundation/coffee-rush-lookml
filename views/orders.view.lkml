@@ -35,18 +35,21 @@ view: orders {
 
   dimension_group: order {
     type: time
+    datatype: date
     timeframes: [raw, date, week, month, quarter, year]
     sql: ${TABLE}.order_date ;;
   }
 
   dimension_group: shipped {
     type: time
+    datatype: date
     timeframes: [raw, date, week, month, quarter, year]
     sql: ${TABLE}.shipped_date ;;
   }
 
   dimension_group: delivered {
     type: time
+    datatype: date
     timeframes: [raw, date, week, month, quarter, year]
     sql: ${TABLE}.delivered_date ;;
   }
