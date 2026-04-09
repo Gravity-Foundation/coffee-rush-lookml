@@ -1,54 +1,50 @@
-view: products {
-  sql_table_name: `coffee_rush.products` ;;
-  drill_fields: [id]
+  view: products {
+    sql_table_name: coffee_rush.products ;;
 
-  dimension: id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.id ;;
-  }
-  dimension: brand {
-    type: string
-    sql: ${TABLE}.brand ;;
-  }
-  dimension: category {
-    type: string
-    sql: ${TABLE}.category ;;
-  }
-  dimension: cost {
-    type: number
-    sql: ${TABLE}.cost ;;
-  }
-  dimension_group: created {
-    type: time
-    timeframes: [raw, date, week, month, quarter, year]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.created_date ;;
-  }
+    dimension: id {
+      primary_key: yes
+      type: number
+      sql: ${TABLE}.id ;;
+    }
 
-  dimension: description {
-    type: string
-    sql: ${TABLE}.description ;;
+    dimension: name {
+      type: string
+      sql: ${TABLE}.name ;;
+    }
+
+    dimension: category {
+      type: string
+      sql: ${TABLE}.category ;;
+    }
+
+    dimension: brand {
+      type: string
+      sql: ${TABLE}.brand ;;
+    }
+
+    dimension: price {
+      type: number
+      sql: ${TABLE}.price ;;
+      value_format_name: usd
+    }
+
+    dimension: sku {
+      type: string
+      sql: ${TABLE}.sku ;;
+    }
+
+    dimension: is_active {
+      type: yesno
+      sql: ${TABLE}.is_active ;;
+    }
+
+    measure: count {
+      type: count
+    }
+
+    measure: avg_price {
+      type: average
+      sql: ${price} ;;
+      value_format_name: usd
+    }
   }
-  dimension: is_active {
-    type: yesno
-    sql: ${TABLE}.is_active ;;
-  }
-  dimension: name {
-    type: string
-    sql: ${TABLE}.name ;;
-  }
-  dimension: price {
-    type: number
-    sql: ${TABLE}.price ;;
-  }
-  dimension: sku {
-    type: string
-    sql: ${TABLE}.sku ;;
-  }
-  measure: count {
-    type: count
-    drill_fields: [id, name, order_items.count]
-  }
-}

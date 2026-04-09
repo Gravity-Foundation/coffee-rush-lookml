@@ -1,44 +1,42 @@
 connection: "demo"
 
-# include all the views
-include: "/views/**/*.view.lkml"
+include: "/views/*.view.lkml"
 
-datagroup: coffee_rush_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
+explore: orders {
+  label: "Orders Analysis"
+  description: "Analyze orders with user, product, and order item details"
 
-persist_with: coffee_rush_default_datagroup
+  join: users {
+    type: left_outer
+    sql_on: ${orders.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
 
-explore: order_items {
+  join: order_items {
+    type: left_outer
+    sql_on: ${orders.id} = ${order_items.order_id} ;;
+    relationship: one_to_many
+  }
+
   join: products {
-    type: left_outer 
+    type: left_outer
     sql_on: ${order_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
+}
+
+explore: products {
+  label: "Product Catalog"
+  description: "Browse and analyze the coffee product catalog"
+}
+
+explore: users {
+  label: "Customer Analysis"
+  description: "Analyze customer demographics and behavior"
 
   join: orders {
-    type: left_outer 
-    sql_on: ${order_items.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
-
-  join: users {
-    type: left_outer 
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
+    type: left_outer
+    sql_on: ${users.id} = ${orders.user_id} ;;
+    relationship: one_to_many
   }
 }
-
-explore: orders {
-  join: users {
-    type: left_outer 
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: products {}
-
-explore: users {}
-
