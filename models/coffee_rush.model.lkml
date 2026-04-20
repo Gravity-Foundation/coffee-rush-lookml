@@ -30,6 +30,11 @@ explore: products {
   description: "Browse and analyze the coffee product catalog"
 }
 
+explore: orders_monthly_summary {
+  label: "Finance Revenue Summary"
+  description: "Pre-aggregated monthly revenue table used by Finance. Attributes orders by delivered_date and includes all order statuses."
+}
+
 explore: users {
   label: "Customer Analysis"
   description: "Analyze customer demographics and behavior"
